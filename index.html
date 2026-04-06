@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WatermarkRemover AI – Remove Watermarks in Seconds</title>
+  <meta name="description" content="Automatically remove watermarks, logos, text, and unwanted objects from images and videos using advanced AI inpainting technology. Free to start, no software needed." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ── NAVBAR ─────────────────────────────────────────── -->
+<header class="navbar" id="navbar">
+  <nav class="nav-container">
+    <a href="index.html" class="logo" id="logo-link">
+      <span class="logo-icon">✦</span>
+      <span class="logo-text">WatermarkRemover<span class="logo-ai">AI</span></span>
+    </a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="#upscale" class="nav-link">Upscale</a></li>
+      <li><a href="#deblur" class="nav-link">Deblur</a></li>
+      <li><a href="#features" class="nav-link">Features</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle dark/light mode">
+        <span class="theme-icon" id="theme-icon">🌙</span>
+      </button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobile-menu">
+  <ul>
+    <li><a href="#features" class="mobile-link">Features</a></li>
+  </ul>
+</div>
+
+<!-- ── HERO ───────────────────────────────────────────── -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+  <div class="container hero-content">
+    <div class="badge-pill" id="hero-badge">
+      <span class="badge-dot"></span>
+      <span>AI-powered · No signup required for first use</span>
+    </div>
+    <h1 class="hero-title" id="hero-title">
+      Remove Watermarks<br />
+      <span class="gradient-text">in Seconds with AI</span>
+    </h1>
+    <p class="hero-subtitle" id="hero-subtitle">
+      Erase watermarks, logos, text overlays &amp; unwanted objects from images and videos instantly.
+      No Photoshop. No skills needed. Just upload &amp; download.
+    </p>
+    <div class="hero-cta" id="hero-cta">
+      <a href="#upload" class="btn btn-primary btn-lg pulse-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload & Remove Watermark
+      </a>
+      <a href="#how-it-works" class="btn btn-ghost btn-lg">See How It Works →</a>
+    </div>
+    <div class="hero-stats" id="hero-stats">
+      <div class="stat-item"><span class="stat-num">2M+</span><span class="stat-label">Images Processed</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-num">99.3%</span><span class="stat-label">Accuracy Rate</span></div>
+      <div class="stat-divider"></div>
+      <div class="stat-item"><span class="stat-num">&lt;5s</span><span class="stat-label">Avg Process Time</span></div>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+    <span>Scroll to explore</span>
+  </div>
+</section>
+
+<!-- ── UPLOAD SECTION ─────────────────────────────────── -->
+<section class="upload-section" id="upload">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Try It <span class="gradient-text">Right Now</span></h2>
+      <p class="section-subtitle">Drag & drop your image or video — see the magic happen</p>
+    </div>
+
+    <div class="upload-workspace" id="upload-workspace">
+      <!-- Step 1: Upload Dropzone -->
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="file-input" accept="image/png,image/jpeg,image/webp,video/mp4,video/webm,video/quicktime" hidden />
+        <div class="dropzone-inner">
+          <div class="upload-icon-ring">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+              <path d="m9 17 3-3 3 3"/>
+              <path d="M12 12v9"/>
+            </svg>
+          </div>
+          <p class="dropzone-title">Drop your image or video here</p>
+          <p class="dropzone-sub">or <button class="link-btn" id="browse-btn">browse files</button></p>
+          <p class="dropzone-hint">Supports PNG, JPG, WEBP, MP4, WEBM up to 50MB</p>
+          <div class="dropzone-formats">
+            <span>PNG</span><span>JPG</span><span>WEBP</span><span>MP4</span><span>WEBM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 2: Mask Editor — Paint over watermark -->
+      <div class="mask-editor" id="mask-editor" style="display:none;">
+        <div class="mask-header">
+          <h3>🎨 Paint over the watermark to remove it</h3>
+          <p>Use the brush to mark the area you want removed, then click "Remove Watermark"</p>
+        </div>
+        <div class="mask-toolbar">
+          <div class="toolbar-group">
+            <label class="toolbar-label">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              Brush: <span id="brush-size-label">25px</span>
+            </label>
+            <input type="range" id="brush-size" min="5" max="80" value="25" class="brush-slider" />
+          </div>
+          <div class="toolbar-group toolbar-actions">
+            <button class="btn btn-ghost btn-sm" id="undo-mask-btn" title="Undo last stroke">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7v6h6"/><path d="M3 13a9 9 0 1 0 2.636-6.364L3 7"/></svg>
+              Undo
+            </button>
+            <button class="btn btn-ghost btn-sm" id="clear-mask-btn" title="Clear all painting">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M5 6l1 14h12l1-14"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+        <div class="mask-canvas-container">
+          <img id="mask-image" src="" alt="Uploaded image for masking" />
+          <canvas id="mask-canvas"></canvas>
+        </div>
+        <div class="mask-footer">
+          <button class="btn btn-ghost" id="back-to-upload-btn">← Choose Different Image</button>
+          <button class="btn btn-primary btn-lg pulse-btn" id="remove-watermark-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            Remove Watermark
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 3: Processing + Before/After Result -->
+      <div class="processing-panel" id="processing-panel" style="display:none;">
+        <div class="preview-container" id="preview-container">
+          <div class="preview-card">
+            <div class="preview-label">Before</div>
+            <div class="preview-img-wrap">
+              <img id="before-img-result" src="" alt="Original" />
+              <video id="before-vid-result" style="display:none;width:100%;height:100%;object-fit:contain;background:#000;" controls muted loop></video>
+            </div>
+          </div>
+          <div class="preview-arrow">
+            <div class="arrow-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-label">After</div>
+            <div class="preview-img-wrap after-wrap">
+              <img id="after-img-result" src="" alt="Processed" style="display:none;" />
+              <video id="after-vid-result" style="display:none;width:100%;height:100%;object-fit:contain;background:#000;" controls muted loop></video>
+              <div class="ai-processing" id="ai-processing">
+                <div class="ai-spinner"></div>
+                <div class="ai-scan-line" id="scan-line"></div>
+                <p class="ai-status" id="ai-status">Preparing image...</p>
+                <div class="ai-progress-bar">
+                  <div class="ai-progress-fill" id="progress-fill"></div>
+                </div>
+                <p class="ai-percent" id="ai-percent">0%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="completion-panel" id="completion-panel" style="display:none;">
+          <div class="completion-badge">
+            <span class="check-icon">✓</span>
+            <span>Watermark Removed!</span>
+          </div>
+          <div class="action-row">
+            <button class="btn btn-primary btn-lg" id="download-btn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Result
+            </button>
+            <button class="btn btn-ghost" id="try-another-btn">Try Another Image</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Free Plan Notice -->
+    <div class="free-notice" id="free-notice">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <span><strong>100% Free Forever</strong>. No limits, no watermarks, full quality.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── UPSCALE SECTION ─────────────────────────────────── -->
+<section class="upload-section upscale-section" id="upscale">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Upscale Images & Videos to <span class="gradient-text">4K</span> with AI</h2>
+      <p class="section-subtitle">Boost resolution and enhance details automatically</p>
+    </div>
+
+    <div class="upscale-tabs">
+      <button class="upscale-tab active" data-target="upscale-image-tab">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        Image Upscaler
+      </button>
+      <button class="upscale-tab" data-target="upscale-video-tab">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        Video Upscaler
+      </button>
+    </div>
+
+    <!-- Image Upscaler Tab -->
+    <div class="upscale-workspace" id="upscale-image-tab">
+      
+      <!-- Upload Dropzone -->
+      <div class="dropzone" id="upscale-image-dropzone">
+        <input type="file" id="upscale-img-file-input" accept="image/png,image/jpeg,image/webp" hidden />
+        <div class="dropzone-inner">
+          <div class="upload-icon-ring">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+              <path d="m9 17 3-3 3 3"/>
+              <path d="M12 12v9"/>
+            </svg>
+          </div>
+          <p class="dropzone-title">Drop your image here to upscale</p>
+          <p class="dropzone-sub">or <button class="link-btn" id="upscale-img-browse-btn">browse files</button></p>
+          <p class="dropzone-hint">Supports PNG, JPG, WEBP</p>
+        </div>
+      </div>
+
+      <!-- Processing Panel -->
+      <div class="processing-panel" id="upscale-img-processing-panel" style="display:none;">
+        <div class="upscale-preview-header">
+           <div class="res-badge">Original: <span id="img-orig-res">-- x --</span></div>
+           <div class="res-arrow">→</div>
+           <div class="res-badge res-4k">Upscaled: <span id="img-new-res">4K</span></div>
+        </div>
+
+        <div class="preview-container upscale-slider-container">
+          <div class="img-comp-container">
+            <div class="img-comp-img">
+              <img id="upscale-img-after" src="" alt="Upscaled" />
+              <div class="ai-processing" id="upscale-img-ai-processing">
+                <div class="ai-spinner"></div>
+                <div class="ai-scan-line"></div>
+                <p class="ai-status" id="upscale-img-ai-status">Enhancing to 4K...</p>
+                <div class="ai-progress-bar"><div class="ai-progress-fill" id="upscale-img-progress-fill"></div></div>
+                <p class="ai-percent" id="upscale-img-percent">0%</p>
+              </div>
+            </div>
+            <div class="img-comp-img img-comp-overlay" id="img-comp-overlay">
+              <img id="upscale-img-before" src="" alt="Original" />
+            </div>
+          </div>
+        </div>
+
+        <div class="completion-panel" id="upscale-img-completion-panel" style="display:none;">
+          <div class="action-row" style="margin-top: 1.5rem;">
+            <button class="btn btn-primary btn-lg" id="upscale-img-download-btn">
+              Download 4K Image
+            </button>
+            <button class="btn btn-ghost" id="upscale-img-try-another-btn">Upscale Another Image</button>
+          </div>
+        </div>
+      </div>
+      <div class="upscale-action" id="upscale-img-action" style="display:none; text-align:center; margin-top:20px;">
+        <button class="btn btn-primary btn-lg pulse-btn" id="do-upscale-img-btn">Upscale to 4K</button>
+      </div>
+
+    </div>
+
+    <!-- Video Upscaler Tab -->
+    <div class="upscale-workspace" id="upscale-video-tab" style="display:none;">
+      
+      <!-- Upload Dropzone -->
+      <div class="dropzone" id="upscale-video-dropzone">
+        <input type="file" id="upscale-vid-file-input" accept="video/mp4,video/webm,video/quicktime" hidden />
+        <div class="dropzone-inner">
+          <div class="upload-icon-ring">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/>
+              <path d="m9 17 3-3 3 3"/>
+              <path d="M12 12v9"/>
+            </svg>
+          </div>
+          <p class="dropzone-title">Drop your video here to upscale</p>
+          <p class="dropzone-sub">or <button class="link-btn" id="upscale-vid-browse-btn">browse files</button></p>
+          <p class="dropzone-hint">Supports MP4, WEBM</p>
+        </div>
+      </div>
+
+      <!-- Processing Panel -->
+      <div class="processing-panel" id="upscale-vid-processing-panel" style="display:none;">
+        <div class="upscale-preview-header">
+           <div class="res-badge">Original: <span id="vid-orig-res">-- x --</span></div>
+           <div class="res-arrow">→</div>
+           <div class="res-badge res-4k">Upscaled: <span id="vid-new-res">4K</span></div>
+        </div>
+
+        <div class="preview-container upscale-preview-container">
+          <div class="preview-card">
+            <div class="preview-label">Original</div>
+            <div class="preview-img-wrap">
+              <video id="upscale-vid-before" style="width:100%;height:100%;object-fit:contain;background:#000;" controls muted loop></video>
+            </div>
+          </div>
+          <div class="preview-arrow">
+            <div class="arrow-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+          <div class="preview-card">
+            <div class="preview-label">4K Enhanced</div>
+            <div class="preview-img-wrap after-wrap">
+              <video id="upscale-vid-after" style="display:none;width:100%;height:100%;object-fit:contain;background:#000;" controls muted loop></video>
+              <div class="ai-processing" id="upscale-vid-ai-processing">
+                <div class="ai-spinner"></div>
+                <div class="ai-scan-line"></div>
+                <p class="ai-status" id="upscale-vid-ai-status">Enhancing video frames...</p>
+                <div class="ai-progress-bar"><div class="ai-progress-fill" id="upscale-vid-progress-fill"></div></div>
+                <p class="ai-percent" id="upscale-vid-percent">0%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="completion-panel" id="upscale-vid-completion-panel" style="display:none;">
+          <div class="action-row" style="margin-top: 1.5rem;">
+            <button class="btn btn-primary btn-lg" id="upscale-vid-download-btn">
+              Download 4K Video
+            </button>
+            <button class="btn btn-ghost" id="upscale-vid-try-another-btn">Upscale Another Video</button>
+          </div>
+        </div>
+      </div>
+      <div class="upscale-action" id="upscale-vid-action" style="display:none; text-align:center; margin-top:20px;">
+        <button class="btn btn-primary btn-lg pulse-btn" id="do-upscale-vid-btn">Upscale Video to 4K</button>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<!-- ── DEBLUR SECTION ─────────────────────────────────── -->
+<section class="upload-section upscale-section" id="deblur" style="border-top: 1px solid var(--border);">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Deblur & Enhance <span class="gradient-text">Faces</span></h2>
+      <p class="section-subtitle">Restore details, sharpen images, and fix blurry photos instantly</p>
+    </div>
+
+    <div class="upscale-workspace" id="deblur-image-tab">
+      <!-- Upload Dropzone -->
+      <div class="dropzone" id="deblur-image-dropzone">
+        <input type="file" id="deblur-img-file-input" accept="image/png,image/jpeg,image/webp" hidden />
+        <div class="dropzone-inner">
+          <div class="upload-icon-ring">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><path d="M12 2v20 M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <p class="dropzone-title">Drop your blurry image here</p>
+          <p class="dropzone-sub">or <button class="link-btn" id="deblur-img-browse-btn">browse files</button></p>
+          <p class="dropzone-hint">Supports PNG, JPG, WEBP</p>
+        </div>
+      </div>
+
+      <!-- Processing Panel -->
+      <div class="processing-panel" id="deblur-img-processing-panel" style="display:none;">
+        <div class="upscale-preview-header">
+           <div class="res-badge">Original: <span id="deblur-orig-res">-- x --</span></div>
+           <div class="res-arrow">→</div>
+           <div class="res-badge res-4k">Enhanced HD</div>
+        </div>
+
+        <div class="preview-container upscale-slider-container">
+          <div class="img-comp-container">
+            <div class="img-comp-img">
+              <img id="deblur-img-after" src="" alt="Enhanced" />
+              <div class="ai-processing" id="deblur-img-ai-processing">
+                <div class="ai-spinner"></div>
+                <div class="ai-scan-line"></div>
+                <p class="ai-status" id="deblur-img-ai-status">Sharpening edges...</p>
+                <div class="ai-progress-bar"><div class="ai-progress-fill" id="deblur-img-progress-fill"></div></div>
+                <p class="ai-percent" id="deblur-img-percent">0%</p>
+              </div>
+            </div>
+            <div class="img-comp-img img-comp-overlay" id="deblur-img-comp-overlay">
+              <img id="deblur-img-before" src="" alt="Blurry Original" />
+            </div>
+          </div>
+        </div>
+
+        <div class="completion-panel" id="deblur-img-completion-panel" style="display:none;">
+          <div class="action-row" style="margin-top: 1.5rem;">
+            <button class="btn btn-primary btn-lg" id="deblur-img-download-btn">Download Enhanced Image</button>
+            <button class="btn btn-ghost" id="deblur-img-try-another-btn">Enhance Another Image</button>
+          </div>
+        </div>
+      </div>
+      <div class="upscale-action" id="deblur-img-action" style="display:none; text-align:center; margin-top:20px;">
+        <button class="btn btn-primary btn-lg pulse-btn" id="do-deblur-img-btn">Deblur & Enhance Image</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ── HOW IT WORKS ───────────────────────────────────── -->
+<section class="how-it-works" id="how-it-works">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Simple Process</p>
+      <h2 class="section-title">How It <span class="gradient-text">Works</span></h2>
+      <p class="section-subtitle">Three simple steps to clean, watermark-free images</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card" data-step="1">
+        <div class="step-number">01</div>
+        <div class="step-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242"/><path d="m9 17 3-3 3 3"/><path d="M12 12v9"/>
+          </svg>
+        </div>
+        <h3>Upload Your File</h3>
+        <p>Drag & drop or browse to upload any image or video. Supports PNG, JPG, WEBP, MP4 and more.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-card" data-step="2">
+        <div class="step-number">02</div>
+        <div class="step-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+          </svg>
+        </div>
+        <h3>AI Removes It</h3>
+        <p>Our advanced inpainting AI detects and seamlessly removes watermarks, logos, and text overlays in seconds.</p>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step-card" data-step="3">
+        <div class="step-number">03</div>
+        <div class="step-icon-wrap">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+        </div>
+        <h3>Download in HD</h3>
+        <p>Get your clean, watermark-free file instantly in full resolution. No quality loss guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FEATURES ───────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Why Choose Us</p>
+      <h2 class="section-title">Everything You <span class="gradient-text">Need</span></h2>
+      <p class="section-subtitle">Powerful features packed into a dead-simple interface</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card featured">
+        <div class="feature-icon">⚡</div>
+        <h3>Lightning Fast</h3>
+        <p>Process images in under 5 seconds using distributed GPU infrastructure. No waiting in queues.</p>
+        <div class="feature-glow"></div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI-Powered Inpainting</h3>
+        <p>State-of-the-art deep learning reconstructs the background behind watermarks — pixel perfect.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🆓</div>
+        <h3>100% Free Forever</h3>
+        <p>No subscriptions, no hidden fees, and absolutely no limits. Use it as much as you want.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">💻</div>
+        <h3>No Software Needed</h3>
+        <p>100% browser-based. Works on any device — desktop, tablet, or mobile. Nothing to install.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy First</h3>
+        <p>Your files are processed securely and auto-deleted after 1 hour. Never stored or shared.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🎬</div>
+        <h3>Video Support</h3>
+        <p>Remove watermarks from video files frame by frame. Up to 4K resolution supported.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3>Batch Processing</h3>
+        <p>Upload multiple images at once. Perfect for agencies and content creators.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>API Access</h3>
+        <p>Integrate watermark removal directly into your workflow with our RESTful API. Full docs included.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SOCIAL PROOF ───────────────────────────────────── -->
+<section class="social-proof" id="testimonials">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">Testimonials</p>
+      <h2 class="section-title">Loved by <span class="gradient-text">Creators</span></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"WatermarkRemover AI saved me hours of Photoshop work. The results are indistinguishable from professional editing!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#6366f1,#8b5cf6);">S</div>
+          <div><strong>Sarah K.</strong><span>Content Creator</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card featured-testimonial">
+        <div class="stars">★★★★★</div>
+        <p>"We process 500+ product images a day. The batch processing is a lifesaver. Incredible that this tool is fully free!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#06b6d4,#3b82f6);">M</div>
+          <div><strong>Marcus T.</strong><span>E-commerce Manager</span></div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p>"Tried 10 different tools. This is the ONLY one that perfectly removes watermarks without leaving artifacts."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background: linear-gradient(135deg,#f59e0b,#ef4444);">R</div>
+          <div><strong>Riyaz A.</strong><span>Graphic Designer</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FAQ ────────────────────────────────────────────── -->
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-eyebrow">FAQ</p>
+      <h2 class="section-title">Frequently Asked <span class="gradient-text">Questions</span></h2>
+    </div>
+    <div class="faq-list" id="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Is WatermarkRemover AI really free?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! WatermarkRemover AI is 100% free with absolutely no limits, no subscriptions, and full access to all features like batch processing and video support.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What types of watermarks can it remove?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Our AI can remove transparent watermarks, text overlays, logos, semi-transparent stamps, and most types of watermarks that appear over images. Results may vary based on the complexity of the background.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Are my images stored or shared?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>No. Your uploaded files are processed in real-time and automatically deleted from our servers within 1 hour. We never store, share, or train on your images without explicit consent.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Does it work on videos?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes, video watermark removal is fully supported for free! We support MP4, WEBM, and other common formats. Processing time depends on video length and resolution.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>What output quality can I expect?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Every processed image and video is provided in full HD quality. You can download lossless outputs without any downgrade in resolution up to 4K.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span>Do you offer an API for developers?</span>
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-answer">
+          <p>Yes! We offer full API access with complete documentation completely free of charge. You can easily integrate watermark removal directly into your applications.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ─────────────────────────────────────── -->
+<section class="cta-banner">
+  <div class="cta-orb cta-orb-1"></div>
+  <div class="cta-orb cta-orb-2"></div>
+  <div class="container">
+    <h2 class="cta-title">Start Removing Watermarks <span class="gradient-text">for Free</span></h2>
+    <p class="cta-subtitle">Join 2 million+ users who trust WatermarkRemover AI. No credit card. No software. Just results.</p>
+    <div class="cta-actions">
+      <a href="#hero" class="btn btn-primary btn-lg">Start Enhancing Free →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ─────────────────────────────────────────── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">✦</span>
+          <span class="logo-text">WatermarkRemover<span class="logo-ai">AI</span></span>
+        </a>
+        <p>The world's fastest AI watermark removal tool. Trusted by 2M+ creators worldwide.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter" class="social-btn">𝕏</a>
+          <a href="#" aria-label="LinkedIn" class="social-btn">in</a>
+          <a href="#" aria-label="YouTube" class="social-btn">▶</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="#">API Docs</a></li>
+          <li><a href="#">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Use Cases</h4>
+        <ul>
+          <li><a href="#">Remove Image Watermark</a></li>
+          <li><a href="#">Remove Video Watermark</a></li>
+          <li><a href="#">Remove Logo</a></li>
+          <li><a href="#">Remove Text Overlay</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 WatermarkRemover AI. All rights reserved.</p>
+      <p>Made with ♥ using AI</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
